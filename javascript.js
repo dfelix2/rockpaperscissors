@@ -17,17 +17,22 @@ function getComputerChoice(rndInt) {
 
 let input = window.prompt("Rock, paper, or scissors?");
 
-function playerSelection(input) {
-if (input === 'rock' && getComputerChoice(rndInt) === 'Paper') {
+let str = input.toLowerCase();
+
+
+function playerSelection(str) {
+if (str === 'rock' && getComputerChoice(rndInt) === 'Paper') {
     return 'You lose! Paper beats Rock.';
-} else if (input === 'paper' && getComputerChoice(rndInt) === 'Rock') {
+} else if (str === 'paper' && getComputerChoice(rndInt) === 'Rock') {
     return 'You win! Paper beats Rock.';  
-} else if (input === 'scissors' && getComputerChoice(rndInt) === 'Paper') {
-    return 'You win! Scissors beats paper.';
-} else if (input === 'scissors' && getComputerChoice(rndInt) === 'Rock') {
-    return 'You lose! Rock beats scissors.';
-} else if (input === 'rock' && getComputerChoice(rndInt) === 'Scissors') {
-    return 'You win! Rock beats scissors.';
+} else if (str === 'paper' && getComputerChoice(rndInt) === 'Scissors') {
+    return 'You lose! Scissors beats Paper.';
+} else if (str === 'scissors' && getComputerChoice(rndInt) === 'Paper') {
+    return 'You win! Scissors beats Paper.';
+} else if (str === 'scissors' && getComputerChoice(rndInt) === 'Rock') {
+    return 'You lose! Rock beats Scissors.';
+} else if (str === 'rock' && getComputerChoice(rndInt) === 'Scissors') {
+    return 'You win! Rock beats Scissors.';
 } else {
     return 'You tied!';
 }
