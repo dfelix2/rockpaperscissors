@@ -55,18 +55,6 @@ function playRound(userChoice, computerChoice) {
         resultDisplay.textContent = 'Error';
     }
 } 
-/*
-function playerWins() {
-    displayPlayerWins.textContent = 'Your score: ' + playerScore;
-}
-
-function computerWins() {
-    displayComputerWins.textContent = 'Computer score: ' + computerScore;
-}
-
-function ties() {
-    displayTies.textContent = 'Ties: ' + tieScore;
-}*/
 
 function displayWins() {
     displayPlayerWins.textContent = 'Your score: ' + playerScore;
