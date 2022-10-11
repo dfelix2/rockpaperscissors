@@ -2,8 +2,12 @@ const userChoiceDisplay = document.createElement('h1');
 const computerChoiceDisplay = document.createElement('h1');
 const resultDisplay = document.createElement('h1');
 const possibleChoices = document.querySelectorAll('button');
+const displayPlayerWins = document.createElement('h1');
+const displayComputerWins = document.createElement('h1');
+const displayTies = document.createElement('h1');
+const displayResult = document.createElement('h1')
 const gameGrid = document.getElementById('game');
-gameGrid.append(userChoiceDisplay, computerChoiceDisplay, resultDisplay);
+gameGrid.append(userChoiceDisplay, computerChoiceDisplay, resultDisplay, displayPlayerWins, displayComputerWins, displayTies, displayResult);
 
 let userChoice;
 let computerChoice;
@@ -13,6 +17,7 @@ possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click
     userChoiceDisplay.textContent = 'User choice ' + userChoice;
     generateComputerChoice();
     playRound(userChoice, computerChoice);
+    displayWins();
 }))
 
 const choices = ['rock', 'paper', 'scissors'];
@@ -28,6 +33,9 @@ let computerScore = 0;
 let tieScore = 0;
 
 function playRound(userChoice, computerChoice) {
+    if(playerScore === 5 || computerScore === 5){
+        return
+    }
     if(
     (userChoice === 'rock' && computerChoice === 'paper') || 
     (userChoice === 'paper' && computerChoice === 'scissors') || 
@@ -47,6 +55,30 @@ function playRound(userChoice, computerChoice) {
         resultDisplay.textContent = 'Error';
     }
 } 
+/*
+function playerWins() {
+    displayPlayerWins.textContent = 'Your score: ' + playerScore;
+}
 
+function computerWins() {
+    displayComputerWins.textContent = 'Computer score: ' + computerScore;
+}
 
+function ties() {
+    displayTies.textContent = 'Ties: ' + tieScore;
+}*/
+
+function displayWins() {
+    displayPlayerWins.textContent = 'Your score: ' + playerScore;
+    displayComputerWins.textContent = 'Computer score: ' + computerScore;
+    displayTies.textContent = 'Ties: ' + tieScore;
+
+   if(playerScore === 5) {
+    displayResult.textContent = 'Game Over! You Win!'
+   } else if(computerScore === 5) {
+    displayResult.textContent = 'Game Over! Computer Wins!'
+   } else {
+
+   }
+}
 
