@@ -1,60 +1,52 @@
+const userChoiceDisplay = document.createElement('h1');
+const computerChoiceDisplay = document.createElement('h1');
+const resultDisplay = document.createElement('h1');
+const possibleChoices = document.querySelectorAll('button');
+const gameGrid = document.getElementById('game');
+gameGrid.append(userChoiceDisplay, computerChoiceDisplay, resultDisplay);
 
+let userChoice;
+let computerChoice;
 
-    function computerPlay(){
-        let values = ['rock', 'paper', 'scissors'],
-       valueToUse = values [Math.floor(Math.random()* values.length)];
-       return valueToUse;
-       };
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
+    userChoice = e.target.id;
+    userChoiceDisplay.textContent = 'User choice ' + userChoice;
+    generateComputerChoice();
+    playRound(userChoice, computerChoice);
+}))
 
+const choices = ['rock', 'paper', 'scissors'];
+
+function generateComputerChoice() {
+    const randomChoice = choices[Math.floor(Math.random()* choices.length)];
+    computerChoice = randomChoice;
+    computerChoiceDisplay.textContent = 'Computer choice: ' + computerChoice;
+}
 
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
 
- function playRound() {
-
-    const computerSelection = computerPlay();
-    const playerSelection = window.prompt("Rock, paper, or scissors?").toLowerCase();
-    console.log ('You chose ' + playerSelection + '. ' + 'Computer chose ' + computerSelection + '.');
-
-        if (playerSelection === 'rock' && computerSelection === 'paper') {
-            computerScore++;
-            console.log('You lose! Paper beats Rock.');
-        } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-            playerScore++;
-            console.log('You win! Paper beats Rock.');  
-        } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-            computerScore++;
-            console.log('You lose! Scissors beats Paper.');
-        } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-            playerScore++;
-            console.log('You win! Scissors beats Paper.');
-        } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-            computerScore++;
-            console.log('You lose! Rock beats Scissors.');
-        } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-            playerScore++;
-            console.log('You win! Rock beats Scissors.');
-        } else {
-            tieScore++;
-            console.log('You tied!');
-        }
-    }
-   
-    console.log(playRound());
-
-    function game() {
-        for (let i = 0; i < 4; i++) {
-            console.log(playRound());
-    } if (playerScore > computerScore) {
-        console.log('Player won!');
-    } else if (computerScore > playerScore) {
-        console.log('Computer won!');
+function playRound(userChoice, computerChoice) {
+    if(
+    (userChoice === 'rock' && computerChoice === 'paper') || 
+    (userChoice === 'paper' && computerChoice === 'scissors') || 
+    (userChoice === 'scissors' && computerChoice === 'rock')) {
+        computerScore++;
+        resultDisplay.textContent = 'You lose! ' + computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1) + ' beats ' + userChoice + '.';
+    } else if(
+    (userChoice === 'paper' && computerChoice === 'rock') || 
+    (userChoice === 'scissors' && computerChoice === 'paper') || 
+    (userChoice === 'rock' && computerChoice === 'scissors')) {
+        playerScore++;
+        resultDisplay.textContent = 'You win! ' + userChoice.charAt(0).toUpperCase() + userChoice.slice(1) + ' beats ' + computerChoice + '.';;  
+    } else if(userChoice === computerChoice)  {
+        tieScore++;
+        resultDisplay.textContent = 'You tie!';
     } else {
-        console.log('No winner');
+        resultDisplay.textContent = 'Error';
     }
-    }
+} 
 
-const computerSelection = computerPlay();
-const playerSelection = window.prompt("Rock, paper, or scissors?").toLowerCase();   
-console.log(game());
+
+
